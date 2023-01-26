@@ -177,4 +177,4 @@ def factorization_loss(f_a, f_b):
     off_diag = off_diagonal(c).pow_(2).mean()
     loss = on_diag + 0.005 * off_diag
 
-    return loss + 0.001 * kl_1
+    return loss + kl_1
