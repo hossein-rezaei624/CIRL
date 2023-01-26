@@ -136,7 +136,6 @@ class Trainer:
             # calculate total loss
             total_loss = 0.5*loss_cls_sup + 0.5*loss_cls_inf + const_weight*loss_fac
             loss_dict["total"] = total_loss.item()
-            torch.autograd.set_detect_anomaly(True)
 
             # backward
             total_loss.backward()
