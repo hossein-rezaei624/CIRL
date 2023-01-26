@@ -27,11 +27,11 @@ class Masker(nn.Module):
             nn.Dropout(0.5),
             nn.Linear(in_dim, middle),
             nn.BatchNorm1d(middle, affine=True),
-            nn.ReLU(inplace=False),
+            nn.ReLU(inplace=True),
             nn.Dropout(0.5),
             nn.Linear(middle, middle),
             nn.BatchNorm1d(middle, affine=True),
-            nn.ReLU(inplace=False),
+            nn.ReLU(inplace=True),
             nn.Linear(middle, num_classes))
 
         self.bn = nn.BatchNorm1d(num_classes, affine=False)
