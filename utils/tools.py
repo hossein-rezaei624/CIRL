@@ -145,8 +145,8 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
 
 def factorization_loss(f_a, f_b):
     # empirical cross-correlation matrix
-    #f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
-    #f_b_norm = (f_b - f_b.mean(0)) / (f_b.std(0)+1e-6)
+    f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
+    f_b_norm = (f_b - f_b.mean(0)) / (f_b.std(0)+1e-6)
     #f_a_norm = f_a
     #f_b_norm = f_b
 
@@ -163,10 +163,11 @@ def factorization_loss(f_a, f_b):
     #element_wise_ = 0.5 * (0 - torch.log(f_b.std(1)) + f_b.std(1) / 1 + (f_b.mean(1) - 0).pow(2) / 1 - 1)
     #kl_2_ = element_wise_.sum(-1)
 
-    f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
-    f_b_norm = torch.Tensor(cluster_based(f_b.cpu().detach().numpy(),1,1))
+    #f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
+    #f_b_norm = torch.Tensor(cluster_based(f_b.cpu().detach().numpy(),1,1))
 
-    c = torch.mm(f_a_norm.T, f_b_norm) / f_a_norm.size(0)
+    c_ = torch.mm(f_a_norm.T, f_b_norm) / f_a_norm.size(0)
+    c = torch.Tensor(cluster_based(c_.cpu().detach().numpy(),1,1))
 
     on_diag = torch.diagonal(c).add_(-1).pow_(2).mean()
     off_diag = off_diagonal(c).pow_(2).mean()
