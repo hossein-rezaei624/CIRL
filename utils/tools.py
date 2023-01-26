@@ -177,5 +177,4 @@ def factorization_loss(f_a, f_b):
     off_diag = off_diagonal(c).pow_(2).mean()
     loss = on_diag + 0.005 * off_diag
 
-    torch.autograd.set_detect_anomaly(True)
     return (loss + kl_1)
