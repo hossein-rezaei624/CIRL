@@ -31,7 +31,7 @@ class ResNet(nn.Module):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
 
-    def improvement(rep):
+    def improvement(self, rep):
         v = ViT(
         image_size = 2048,
         patch_size = 16,
@@ -98,7 +98,7 @@ class ResNet(nn.Module):
         #x = self.avgpool(x)
         #x = x.view(x.size(0), -1)
         #print("line 59999999",x.shape)
-        x = improvement(x)
+        x = self.improvement(x)
         print("shape of xxxxxxx:", x.shape)
 
         return x
