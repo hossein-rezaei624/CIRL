@@ -124,7 +124,7 @@ class Trainer:
             num_samples_dict["inf"] = int(scores_inf.size(0))
 
             #transformer
-            features_ori_, features_aug_ = improvement(features_ori, features_aug_)
+            features_ori_, features_aug_ = improvement(features_ori, features_aug)
             
             
             # factorization loss for features between ori and aug
