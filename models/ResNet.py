@@ -35,7 +35,7 @@ class ResNet(nn.Module):
     def improvement(self, rep):
         
         ###print("shape of reppp:", rep.shape)
-        v = ViT('L_16_imagenet1k',
+        v = ViT('B_16_imagenet1k',
         pretrained = True,
         patches = 2,
         num_classes = 2048,
@@ -88,6 +88,7 @@ class ResNet(nn.Module):
 
         x = self.layer1(x)
         x = self.layer2(x)
+        print("shapeeee",x.shape)
         x = self.layer3(x)
         #x = self.layer4(x)
 
