@@ -156,7 +156,7 @@ def improvement(rep_a, rep_b):
     ).to("cuda")
 
 
-    print("shape of rep befor",rep_a.shape)
+    print("shape of rep befor",rep_a.shape,"sssss",rep_a.view(1,1,32,2048).shape)
     preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
     print("shape of rep after",preds_a.shape)
     preds_b = v(rep_b.view(1,1,32,2048))
