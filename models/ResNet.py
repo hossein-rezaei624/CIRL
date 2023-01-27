@@ -100,7 +100,7 @@ class ResNet(nn.Module):
         #x = x.view(x.size(0), -1)
         #print("line 59999999",x.shape)
         x = self.improvement(x)
-        print("shape of xxxxxxx:", x.shape)
+        #print("shape of xxxxxxx:", x.shape)
 
         return x
 
