@@ -120,7 +120,6 @@ class ViT(nn.Module):
         x = self.dropout(x)
 
         x = self.transformer(x)
-        print("shape of transformer",x.shape)
         #x = torch.permute(x,(1,2,0))
         print("shape of transformer1",x.shape)
         x = nn.MaxPool2d((2,1))(x)
@@ -128,11 +127,11 @@ class ViT(nn.Module):
         x = nn.MaxPool2d((2,1))(x)
         x = nn.MaxPool2d((2,1))(x)
         x = nn.MaxPool2d((2,1))(x)
-        print("shape of transformer3",x.shape)
+        x = nn.MaxPool2d((2,1))(x)
         #x = torch.permute(x,(2,0,1))
-        print("shape of transformer4",x.shape)
+        print("shape of transformer3",x.shape)
         x = x.squeeze(1)
-        print("shape of transformer",x.shape)
+        print("shape of transformer4",x.shape)
 
         #x = x.mean(dim = 1) if self.pool == 'mean' else x[:, 0]
 
