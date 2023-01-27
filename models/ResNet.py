@@ -6,6 +6,7 @@ from torchvision.models.resnet import BasicBlock, model_urls, Bottleneck
 import torch.nn.functional as F
 import numpy as np
 import torchvision.models as models
+from vit_pytorch import ViT
 
 
 class ResNet(nn.Module):
@@ -30,6 +31,42 @@ class ResNet(nn.Module):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
 
+    def improvement(rep):
+        v = ViT(
+        image_size = 2048,
+        patch_size = 16,
+        num_classes = 2048,
+        dim = 2048,
+        depth = 6,
+        heads = 16,
+        mlp_dim = 2048,
+        channels = 1024,
+        dropout = 0.1,
+        emb_dropout = 0.1
+        ).to("cuda")
+
+
+        #print("shape of rep befor",rep_a[0].shape,"sssss",rep_a.view(1,1,32,2048).shape)
+        #temp = torch.randn(64, 2048).to("cuda")
+        print("shape of reppp:", rep.shape)
+        #temp = v(rep)
+        #print("shape of tempppp", temp.shape)
+        #print("shapeeeeeeeee", temp.shape)
+
+        '''temp_ = torch.empty_like(rep_b).to("cuda")
+        for i in range(32):
+            #print("shape of temp",temp.shape,"shape of view", v(rep_a[i].view(1,1,16,128)).shape)
+            temp_[i] = v(rep_b[i].view(1,1,16,128))[0]'''
+
+        #preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
+        #print("shape of rep after",preds_a.shape)
+        #preds_b = v(rep_b.view(1,1,32,2048))
+        #return preds_a, preds_b
+        return v(rep)
+
+    
+    
+    
     def _make_layer(self, block, planes, blocks, stride=1):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
@@ -56,11 +93,14 @@ class ResNet(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
-        x = self.layer4(x)
+        #x = self.layer4(x)
 
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
-        print("line 59999999",x.shape)
+        #x = self.avgpool(x)
+        #x = x.view(x.size(0), -1)
+        #print("line 59999999",x.shape)
+        x = improvement(x)
+        print("shape of xxxxxxx:", x.shape)
+
         return x
 
 

@@ -2,7 +2,6 @@ import torch
 from torchvision.utils import save_image
 import numpy as np
 import torch.nn.functional as F
-from vit_pytorch import ViT
 
 def denorm(tensor, device, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]):
     std = torch.Tensor(std).reshape(-1, 1, 1).to(device)
@@ -142,42 +141,10 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
   return post_rep
 
 
-def improvement(rep_a, rep_b):
-    v = ViT(
-    image_size = 2048,
-    patch_size = 16,
-    num_classes = 2048,
-    dim = 2048,
-    depth = 6,
-    heads = 16,
-    mlp_dim = 2048,
-    channels = 1,
-    dropout = 0.1,
-    emb_dropout = 0.1
-    ).to("cuda")
 
-
-    #print("shape of rep befor",rep_a[0].shape,"sssss",rep_a.view(1,1,32,2048).shape)
-    temp = torch.empty_like(rep_a).to("cuda")
-    for i in range(32):
-        #print("shape of temp",temp.shape,"shape of view", v(rep_a[i].view(1,1,16,128)).shape)
-        temp[i] = v(rep_a[i].view(1,1,16,128))[0]
-    #print("shapeeeeeeeee", temp.shape)
-
-    temp_ = torch.empty_like(rep_b).to("cuda")
-    for i in range(32):
-        #print("shape of temp",temp.shape,"shape of view", v(rep_a[i].view(1,1,16,128)).shape)
-        temp_[i] = v(rep_b[i].view(1,1,16,128))[0]
-
-    #preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
-    #print("shape of rep after",preds_a.shape)
-    #preds_b = v(rep_b.view(1,1,32,2048))
-    #return preds_a, preds_b
-    return temp, temp_
-
-def factorization_loss(f_a_, f_b_):
+def factorization_loss(f_a, f_b):
     #transformer
-    f_a, f_b = improvement(f_a_, f_b_)
+    #f_a, f_b = improvement(f_a_, f_b_)
 
     # empirical cross-correlation matrix
     f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
