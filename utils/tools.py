@@ -162,7 +162,10 @@ def improvement(rep_a, rep_b):
     preds_b = v(rep_b.view(1,1,32,2048))
     return preds_a, preds_b
 
-def factorization_loss(f_a, f_b):
+def factorization_loss(f_a_, f_b_):
+    #transformer
+    f_a, f_b = improvement(f_a_, f_b_)
+
     # empirical cross-correlation matrix
     f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
     f_b_norm = (f_b - f_b.mean(0)) / (f_b.std(0)+1e-6)
