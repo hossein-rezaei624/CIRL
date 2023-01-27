@@ -160,7 +160,7 @@ def improvement(rep_a, rep_b):
     #print("shape of rep befor",rep_a[0].shape,"sssss",rep_a.view(1,1,32,2048).shape)
     temp = torch.Tensor([32,2048])
     for i in range(32):
-        torch.cat((temp,(v(rep_a[i].view(1,1,1,2048)))),0)
+        temp = torch.cat((temp,(v(rep_a[i].view(1,1,1,2048)))),0)
     print("shapeeeeeeeee", temp.shape)
     preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
     print("shape of rep after",preds_a.shape)
