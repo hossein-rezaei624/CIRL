@@ -158,7 +158,7 @@ def improvement(rep_a, rep_b):
 
 
     #print("shape of rep befor",rep_a[0].shape,"sssss",rep_a.view(1,1,32,2048).shape)
-    temp = torch.Tensor([32,2048])
+    temp = torch.Tensor([32,2048]).to("cuda")
     for i in range(32):
         temp = torch.cat((temp,v(rep_a[i].view(1,1,16,128))),0)
     print("shapeeeeeeeee", temp.shape)
