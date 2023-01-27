@@ -164,7 +164,7 @@ def improvement(rep_a, rep_b):
 
 def factorization_loss(f_a_, f_b_):
     #transformer
-    f_a, f_b = improvement(f_a_, f_b_)
+    f_a, f_b = improvement(f_a_, f_b_).to("cuda")
 
     # empirical cross-correlation matrix
     f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
