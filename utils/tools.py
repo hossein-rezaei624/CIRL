@@ -157,9 +157,9 @@ def improvement(rep_a, rep_b):
 
 
     print("shape of rep befor",rep_a.shape)
-    preds_a = v(rep_a) # (1, 1000)
+    preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
     print("shape of rep after",preds_a.shape)
-    preds_b = v(rep_b)
+    preds_b = v(rep_b.view(1,1,32,2048))
     return preds_a, preds_b
 
 def factorization_loss(f_a, f_b):
