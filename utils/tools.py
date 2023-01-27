@@ -153,7 +153,7 @@ def improvement(rep_a, rep_b):
     mlp_dim = 2048,
     dropout = 0.1,
     emb_dropout = 0.1
-    )
+    ).to("cuda")
 
 
     print("shape of rep befor",rep_a.shape)
@@ -164,7 +164,7 @@ def improvement(rep_a, rep_b):
 
 def factorization_loss(f_a_, f_b_):
     #transformer
-    f_a, f_b = improvement(f_a_, f_b_).to("cuda")
+    f_a, f_b = improvement(f_a_, f_b_)
 
     # empirical cross-correlation matrix
     f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
