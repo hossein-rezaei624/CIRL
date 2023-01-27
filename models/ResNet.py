@@ -32,6 +32,8 @@ class ResNet(nn.Module):
                 nn.init.constant_(m.bias, 0)
 
     def improvement(self, rep):
+        
+        print("shape of reppp:", rep.shape)
         v = ViT(
         image_size = 2048,
         patch_size = 14,
@@ -48,7 +50,6 @@ class ResNet(nn.Module):
 
         #print("shape of rep befor",rep_a[0].shape,"sssss",rep_a.view(1,1,32,2048).shape)
         #temp = torch.randn(64, 2048).to("cuda")
-        print("shape of reppp:", rep.shape)
         #temp = v(rep)
         #print("shape of tempppp", temp.shape)
         #print("shapeeeeeeeee", temp.shape)
