@@ -145,7 +145,7 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
 def improvement(rep_a, rep_b):
     v = ViT(
     image_size = 2048,
-    patch_size = 1,
+    patch_size = 64,
     num_classes = 2048,
     dim = 2048,
     depth = 6,
