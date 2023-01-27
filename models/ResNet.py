@@ -6,7 +6,8 @@ from torchvision.models.resnet import BasicBlock, model_urls, Bottleneck
 import torch.nn.functional as F
 import numpy as np
 import torchvision.models as models
-from vit_pytorch import ViT
+#from vit_pytorch import ViT
+import vit_
 
 
 class ResNet(nn.Module):
@@ -34,7 +35,7 @@ class ResNet(nn.Module):
     def improvement(self, rep):
         
         #print("shape of reppp:", rep.shape)
-        v = ViT(
+        v = vit_.ViT(
         image_size = 14,
         patch_size = 2,
         num_classes = 2048,
