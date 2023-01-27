@@ -144,13 +144,14 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
 
 def improvement(rep_a, rep_b):
     v = ViT(
-    image_size = 256,
-    patch_size = 32,
-    num_classes = 1000,
-    dim = 1024,
+    image_size = 2048,
+    patch_size = 64,
+    num_classes = 2048,
+    dim = 2048,
     depth = 6,
     heads = 16,
     mlp_dim = 2048,
+    channels = 1,
     dropout = 0.1,
     emb_dropout = 0.1
     ).to("cuda")
