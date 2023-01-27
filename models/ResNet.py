@@ -56,7 +56,7 @@ class ResNet(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
-        print(x.shape)
+        print("line 59999999",x.shape)
         # x = self.layer4(x)
 
         x = self.avgpool(x)
