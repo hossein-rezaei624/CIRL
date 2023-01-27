@@ -37,10 +37,8 @@ class ResNet(nn.Module):
         ###print("shape of reppp:", rep.shape)
         v = ViT('B_16_imagenet1k',
         pretrained = True,
-        image_size = 14,
         patches = 2,
         num_classes = 2048,
-        dim = 2048,
         in_channels = 1024,
         ).to("cuda")
 
