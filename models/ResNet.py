@@ -34,7 +34,7 @@ class ResNet(nn.Module):
     def improvement(self, rep):
         v = ViT(
         image_size = 2048,
-        patch_size = 16,
+        patch_size = 14,
         num_classes = 2048,
         dim = 2048,
         depth = 6,
