@@ -35,8 +35,8 @@ class ResNet(nn.Module):
         
         #print("shape of reppp:", rep.shape)
         v = ViT(
-        image_size = 2048,
-        patch_size = 16,
+        image_size = 14,
+        patch_size = 2,
         num_classes = 2048,
         dim = 2048,
         depth = 6,
