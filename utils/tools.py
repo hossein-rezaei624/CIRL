@@ -2,6 +2,7 @@ import torch
 from torchvision.utils import save_image
 import numpy as np
 import torch.nn.functional as F
+from vit_pytorch import ViT
 
 def denorm(tensor, device, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]):
     std = torch.Tensor(std).reshape(-1, 1, 1).to(device)
@@ -141,7 +142,23 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
   return post_rep
 
 
+def improvement(rep_a, rep_b):
+    v = ViT(
+    image_size = 256,
+    patch_size = 32,
+    num_classes = 1000,
+    dim = 1024,
+    depth = 6,
+    heads = 16,
+    mlp_dim = 2048,
+    dropout = 0.1,
+    emb_dropout = 0.1
+    )
 
+
+    preds_a = v(rep_a) # (1, 1000)
+    preds_b = v(rep_b)
+    return preds_a, preds_b
 
 def factorization_loss(f_a, f_b):
     # empirical cross-correlation matrix
@@ -176,9 +193,9 @@ def factorization_loss(f_a, f_b):
     off_diag = off_diagonal(c).pow_(2).mean()
     loss = on_diag + 0.005 * off_diag
 
-    qv = c.std()
-    qm = c.mean()
-    element_wise = 0.5 * (0 - torch.log(qv) + qv / 1 + (qm - 0).pow(2) / 1 - 1)
-    kl_1 = element_wise.sum(-1)
-    
-    return (loss + kl_1)
+    #qv = c.std()
+    #qm = c.mean()
+    #element_wise = 0.5 * (0 - torch.log(qv) + qv / 1 + (qm - 0).pow(2) / 1 - 1)
+    #kl_1 = element_wise.sum(-1)
+
+    return loss

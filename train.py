@@ -123,8 +123,12 @@ class Trainer:
             correct_dict["inf"] = calculate_correct(scores_inf, labels)
             num_samples_dict["inf"] = int(scores_inf.size(0))
 
+            #transformer
+            features_ori_, features_aug_ = improvement(features_ori, features_aug_)
+            
+            
             # factorization loss for features between ori and aug
-            loss_fac = factorization_loss(features_ori,features_aug)
+            loss_fac = factorization_loss(features_ori_,features_aug_)
             loss_dict["fac"] = loss_fac.item()
 
             # get consistency weight
