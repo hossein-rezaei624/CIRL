@@ -37,7 +37,7 @@ class ResNet(nn.Module):
         ###print("shape of reppp:", rep.shape)
         v = ViT('B_16_imagenet1k',
         pretrained = True,
-        patches = 2,
+        patches = 7,
         image_size = 28,
         num_classes = 2048,
         in_channels = 512,
