@@ -145,7 +145,7 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
 def improvement(rep_a, rep_b):
     v = ViT(
     image_size = 2048,
-    patch_size = 1,
+    patch_size = 16,
     num_classes = 2048,
     dim = 2048,
     depth = 6,
@@ -160,7 +160,7 @@ def improvement(rep_a, rep_b):
     #print("shape of rep befor",rep_a[0].shape,"sssss",rep_a.view(1,1,32,2048).shape)
     temp = torch.Tensor([32,2048])
     for i in range(32):
-        temp = torch.cat((temp,v(rep_a[i].view(1,1,2048,1))),0)
+        temp = torch.cat((temp,v(rep_a[i].view(1,1,16,128))),0)
     print("shapeeeeeeeee", temp.shape)
     preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
     print("shape of rep after",preds_a.shape)
