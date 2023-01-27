@@ -162,11 +162,18 @@ def improvement(rep_a, rep_b):
     for i in range(32):
         #print("shape of temp",temp.shape,"shape of view", v(rep_a[i].view(1,1,16,128)).shape)
         temp[i] = v(rep_a[i].view(1,1,16,128))[0]
-    print("shapeeeeeeeee", temp.shape)
-    preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
-    print("shape of rep after",preds_a.shape)
-    preds_b = v(rep_b.view(1,1,32,2048))
-    return preds_a, preds_b
+    #print("shapeeeeeeeee", temp.shape)
+
+    temp_ = torch.empty_like(rep_b).to("cuda")
+    for i in range(32):
+        #print("shape of temp",temp.shape,"shape of view", v(rep_a[i].view(1,1,16,128)).shape)
+        temp_[i] = v(rep_b[i].view(1,1,16,128))[0]
+
+    #preds_a = v(rep_a.view(1,1,32,2048)) # (1, 1000)
+    #print("shape of rep after",preds_a.shape)
+    #preds_b = v(rep_b.view(1,1,32,2048))
+    #return preds_a, preds_b
+    return temp, temp_
 
 def factorization_loss(f_a_, f_b_):
     #transformer
