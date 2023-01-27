@@ -88,7 +88,7 @@ class ResNet(nn.Module):
         x = self.maxpool(x)
 
         x = self.layer1(x)
-        print("shapeeee",x.shape)
+        #print("shapeeee",x.shape)
         x = self.layer2(x)
         #print("shapeeee",x.shape)
         #x = self.layer3(x)
