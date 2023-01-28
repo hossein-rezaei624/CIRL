@@ -178,12 +178,8 @@ def factorization_loss(f_a__, f_b__):
     off_diag = off_diagonal(c).pow_(2).mean()
     loss = on_diag + 0.005 * off_diag
 
-    print("f_aaa",f_a)
-    print("f_bbb",f_b)
-    print("shape of f_a",f_a.shape)
-    print("shape of f_b",f_b.shape)
+
     aa = torch.mul(f_a,f_b)
-    print("aaa",aa,"shape of aa",aa.shape)
     c_ = (aa - aa.mean(0)) / (aa.std(0)+1e-6)
 
     element_wise = 0.5 * (0 - torch.log(c_.std()) + c_.std() / 1 + (c_.mean() - 0).pow(2) / 1 - 1)
