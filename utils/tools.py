@@ -191,4 +191,4 @@ def factorization_loss(f_a__, f_b__):
     element_wise = 0.5 * (0 - torch.log(c_.std(0)) + c_.std(0) / 1 + (c_.mean(0) - 0).pow(2) / 1 - 1)
     kl_2 = element_wise.sum(-1)'''
 
-    return 0.01*(kl_1 + kl_2 + kl_1_ + kl_2_)
+    return 0.1*(kl_1 + kl_2 + kl_1_ + kl_2_)
