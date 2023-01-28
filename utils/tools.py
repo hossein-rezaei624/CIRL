@@ -142,13 +142,13 @@ def cluster_based(representations, n_cluster: int, n_pc: int):
 
 
 
-def factorization_loss(f_a, f_b):
+def factorization_loss(f_a__, f_b__):
     #transformer
     #f_a, f_b = improvement(f_a_, f_b_)
 
     # empirical cross-correlation matrix
-    #f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
-    #f_b_norm = (f_b - f_b.mean(0)) / (f_b.std(0)+1e-6)
+    f_a = (f_a__ - f_a__.mean(0)) / (f_a__.std(0)+1e-6)
+    f_b = (f_b__ - f_b__.mean(0)) / (f_b__.std(0)+1e-6)
     #f_a_norm = f_a
     #f_b_norm = f_b
 
