@@ -37,10 +37,8 @@ class ResNet(nn.Module):
         ###print("shape of reppp:", rep.shape)
         v = ViT('B_16_imagenet1k',
         pretrained = True,
-        patches = 7,
-        image_size = 28,
+        image_size = 224,
         num_classes = 2048,
-        in_channels = 512,
         ).to("cuda")
 
 
@@ -82,15 +80,15 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x, **kwargs):
-        print("shapeeee",x.shape)
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.relu(x)
-        x = self.maxpool(x)
-
-        x = self.layer1(x)
         #print("shapeeee",x.shape)
-        x = self.layer2(x)
+        #x = self.conv1(x)
+        #x = self.bn1(x)
+        #x = self.relu(x)
+        #x = self.maxpool(x)
+
+        #x = self.layer1(x)
+        #print("shapeeee",x.shape)
+        #x = self.layer2(x)
         #print("shapeeee",x.shape)
         #x = self.layer3(x)
         #x = self.layer4(x)
