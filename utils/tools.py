@@ -178,7 +178,8 @@ def factorization_loss(f_a__, f_b__):
     off_diag = off_diagonal(c).pow_(2).mean()
     loss = on_diag + 0.005 * off_diag
 
-    c_ = (c - c.mean(0)) / (c.std(0)+1e-6)
+    aa = torch.mul(f_a,f_b)
+    c_ = (aa - aa.mean(0)) / (aa.std(0)+1e-6)
 
     element_wise = 0.5 * (0 - torch.log(c_.std()) + c_.std() / 1 + (c_.mean() - 0).pow(2) / 1 - 1)
     kl_1 = element_wise.sum(-1)
