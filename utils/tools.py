@@ -168,7 +168,7 @@ def factorization_loss(f_a__, f_b__):
     #f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
     #f_b_norm = torch.Tensor(cluster_based(f_b.cpu().detach().numpy(),1,1))
 
-    c = torch.mm(f_a.T, f_b) / f_a.size(0)
+    '''c = torch.mm(f_a.T, f_b) / f_a.size(0)
     #c = torch.Tensor(cluster_based(c_.cpu().detach().numpy(),1,1))
 
 
@@ -176,7 +176,7 @@ def factorization_loss(f_a__, f_b__):
 
     on_diag = torch.diagonal(c).add_(-1).pow_(2).mean()
     off_diag = off_diagonal(c).pow_(2).mean()
-    loss = on_diag + 0.005 * off_diag
+    loss = on_diag + 0.005 * off_diag'''
 
 
     #aa = torch.mul(f_a,f_b)
@@ -191,4 +191,4 @@ def factorization_loss(f_a__, f_b__):
     element_wise = 0.5 * (0 - torch.log(c_.std(0)) + c_.std(0) / 1 + (c_.mean(0) - 0).pow(2) / 1 - 1)
     kl_2 = element_wise.sum(-1)'''
 
-    return loss + 0.01*(kl_1 + kl_2 + kl_1_ + kl_2_)
+    return 0.01*(kl_1 + kl_2 + kl_1_ + kl_2_)
