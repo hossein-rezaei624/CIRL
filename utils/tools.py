@@ -147,40 +147,40 @@ def factorization_loss(f_a, f_b):
     #f_a, f_b = improvement(f_a_, f_b_)
 
     # empirical cross-correlation matrix
-    f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
-    f_b_norm = (f_b - f_b.mean(0)) / (f_b.std(0)+1e-6)
+    #f_a_norm = (f_a - f_a.mean(0)) / (f_a.std(0)+1e-6)
+    #f_b_norm = (f_b - f_b.mean(0)) / (f_b.std(0)+1e-6)
     #f_a_norm = f_a
     #f_b_norm = f_b
 
-    #element_wise = 0.5 * (0 - torch.log(f_a.std()) + f_a.std() / 1 + (f_a.mean() - 0).pow(2) / 1 - 1)
-    #kl_1 = element_wise.sum(-1)
+    element_wise = 0.5 * (0 - torch.log(f_a.std()) + f_a.std() / 1 + (f_a.mean() - 0).pow(2) / 1 - 1)
+    kl_1 = element_wise.sum(-1)
 
-    #element_wise_ = 0.5 * (0 - torch.log(f_b.std()) + f_b.std() / 1 + (f_b.mean() - 0).pow(2) / 1 - 1)
-    #kl_2 = element_wise_.sum(-1)
+    element_wise_ = 0.5 * (0 - torch.log(f_b.std()) + f_b.std() / 1 + (f_b.mean() - 0).pow(2) / 1 - 1)
+    kl_2 = element_wise_.sum(-1)
     ###return kl
 
-    #element_wise = 0.5 * (0 - torch.log(f_a.std(1)) + f_a.std(1) / 1 + (f_a.mean(1) - 0).pow(2) / 1 - 1)
-    #kl_1_ = element_wise.sum(-1)
+    element_wise = 0.5 * (0 - torch.log(f_a.std(1)) + f_a.std(1) / 1 + (f_a.mean(1) - 0).pow(2) / 1 - 1)
+    kl_1_ = element_wise.sum(-1)
 
-    #element_wise_ = 0.5 * (0 - torch.log(f_b.std(1)) + f_b.std(1) / 1 + (f_b.mean(1) - 0).pow(2) / 1 - 1)
-    #kl_2_ = element_wise_.sum(-1)
+    element_wise_ = 0.5 * (0 - torch.log(f_b.std(1)) + f_b.std(1) / 1 + (f_b.mean(1) - 0).pow(2) / 1 - 1)
+    kl_2_ = element_wise_.sum(-1)
 
     #f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
     #f_b_norm = torch.Tensor(cluster_based(f_b.cpu().detach().numpy(),1,1))
 
-    c = torch.mm(f_a_norm.T, f_b_norm) / f_a_norm.size(0)
+    #c = torch.mm(f_a_norm.T, f_b_norm) / f_a_norm.size(0)
     #c = torch.Tensor(cluster_based(c_.cpu().detach().numpy(),1,1))
 
 
     #print("kl_1kl_1kl_1kl_1kl_1",kl_1)
 
-    on_diag = torch.diagonal(c).add_(-1).pow_(2).mean()
-    off_diag = off_diagonal(c).pow_(2).mean()
-    loss = on_diag + 0.005 * off_diag
+    #on_diag = torch.diagonal(c).add_(-1).pow_(2).mean()
+    #off_diag = off_diagonal(c).pow_(2).mean()
+    #loss = on_diag + 0.005 * off_diag
 
     #qv = c.std()
     #qm = c.mean()
     #element_wise = 0.5 * (0 - torch.log(qv) + qv / 1 + (qm - 0).pow(2) / 1 - 1)
     #kl_1 = element_wise.sum(-1)
 
-    return loss
+    return 0.1*(kl_1 + kl_2 + kl_1_ + kl_2_)
