@@ -133,8 +133,8 @@ class Trainer:
                                                           rampup_length=self.config["warmup_epoch"],
                                                           rampup_type=self.config["warmup_type"])
 
-            # calculate total loss + const_weight*loss_fac
-            total_loss = 0.5*loss_cls_sup + 0.5*loss_cls_inf
+            # calculate total loss
+            total_loss = 0.5*loss_cls_sup + 0.5*loss_cls_inf + const_weight*loss_fac
             loss_dict["total"] = total_loss.item()
 
             # backward
