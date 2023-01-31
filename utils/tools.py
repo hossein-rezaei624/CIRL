@@ -160,13 +160,19 @@ def factorization_loss(f_a__, f_b__):
     kl_2 = element_wise_.sum(-1)
     ###return kl
 
-    element_wise = 0.5 * (0 - torch.log(f_a.std(0)) + f_a.std(0) / 1 + (f_a.mean(0) - 0).pow(2) / 1 - 1)
+    element_wise = 0.5 * (0 - torch.log(f_a.std(1)) + f_a.std(1) / 1 + (f_a.mean(1) - 0).pow(2) / 1 - 1)
     kl_1_ = element_wise.sum(-1)
 
-    element_wise_ = 0.5 * (0 - torch.log(f_b.std(0)) + f_b.std(0) / 1 + (f_b.mean(0) - 0).pow(2) / 1 - 1)
+    element_wise_ = 0.5 * (0 - torch.log(f_b.std(1)) + f_b.std(1) / 1 + (f_b.mean(1) - 0).pow(2) / 1 - 1)
     kl_2_ = element_wise_.sum(-1)
 
-    m = nn.AvgPool1d(4, stride=4)
+    element_wise = 0.5 * (0 - torch.log(f_a.std(0)) + f_a.std(0) / 1 + (f_a.mean(0) - 0).pow(2) / 1 - 1)
+    kl_1_1 = element_wise.sum(-1)
+
+    element_wise_ = 0.5 * (0 - torch.log(f_b.std(0)) + f_b.std(0) / 1 + (f_b.mean(0) - 0).pow(2) / 1 - 1)
+    kl_2_1 = element_wise_.sum(-1)
+    
+    '''m = nn.AvgPool1d(4, stride=4)
     f_a_new = m(f_a__)
     f_b_new = m(f_b__)
 
@@ -174,7 +180,7 @@ def factorization_loss(f_a__, f_b__):
     kl_1_new = element_wise.sum(-1)
 
     element_wise_ = 0.5 * (0 - torch.log(f_b_new.std(1)) + f_b_new.std(1) / 1 + (f_b_new.mean(1) - 0).pow(2) / 1 - 1)
-    kl_2_new = element_wise_.sum(-1)
+    kl_2_new = element_wise_.sum(-1)'''
     #print("temp_",temp_.shape)
 
     
@@ -205,4 +211,4 @@ def factorization_loss(f_a__, f_b__):
     kl_2 = element_wise.sum(-1)'''
 
     #print("klllll",kl_1, kl_2, kl_1_, kl_2_)
-    return 0.01*(kl_1 + kl_2 + kl_1_ + kl_2_ + kl_1_new + kl_2_new)
+    return (kl_1 + kl_2 + kl_1_ + kl_2_ + kl_1_1 + kl_2_1)
