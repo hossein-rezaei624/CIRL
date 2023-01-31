@@ -168,7 +168,7 @@ def factorization_loss(f_a__, f_b__):
 
     m = nn.AvgPool1d(8, stride=8)
     temp_ = m(f_a__)
-    print("temp_",temp_)
+    print("temp_",temp_.shape)
 
     
     #f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
