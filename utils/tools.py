@@ -159,11 +159,11 @@ def factorization_loss(f_a__, f_b__):
     kl_2 = element_wise_.sum(-1)
     ###return kl
 
-    element_wise = 0.5 * (0 - torch.log(f_a.std(1)) + f_a.std(1) / 1 + (f_a.mean(1) - 0).pow(2) / 1 - 1)
+    '''element_wise = 0.5 * (0 - torch.log(f_a.std(1)) + f_a.std(1) / 1 + (f_a.mean(1) - 0).pow(2) / 1 - 1)
     kl_1_ = element_wise.sum(-1)
 
     element_wise_ = 0.5 * (0 - torch.log(f_b.std(1)) + f_b.std(1) / 1 + (f_b.mean(1) - 0).pow(2) / 1 - 1)
-    kl_2_ = element_wise_.sum(-1)
+    kl_2_ = element_wise_.sum(-1)'''
 
     #f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
     #f_b_norm = torch.Tensor(cluster_based(f_b.cpu().detach().numpy(),1,1))
