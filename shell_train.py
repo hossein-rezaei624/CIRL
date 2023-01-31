@@ -16,7 +16,7 @@ source = ["photo", "cartoon", "art_painting", "sketch"]
 target = args.domain
 source.remove(target)
 
-input_dir = '/content/CIRL/data/datalists'
+input_dir = '/kaggle/working/CIRL/data/datalists'
 output_dir = 'outputs'
 
 config = "PACS/ResNet18"
