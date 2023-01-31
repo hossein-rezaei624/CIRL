@@ -2,6 +2,7 @@ import torch
 from torchvision.utils import save_image
 import numpy as np
 import torch.nn.functional as F
+from torch import nn
 
 def denorm(tensor, device, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]):
     std = torch.Tensor(std).reshape(-1, 1, 1).to(device)
@@ -165,6 +166,11 @@ def factorization_loss(f_a__, f_b__):
     element_wise_ = 0.5 * (0 - torch.log(f_b.std(0)) + f_b.std(0) / 1 + (f_b.mean(0) - 0).pow(2) / 1 - 1)
     kl_2_ = element_wise_.sum(-1)
 
+    m = nn.AvgPool1d(8, stride=8)
+    temp_ = m(f_a__)
+    print("temp_",temp_)
+
+    
     #f_a_norm = torch.Tensor(cluster_based(f_a.cpu().detach().numpy(),1,1))
     #f_b_norm = torch.Tensor(cluster_based(f_b.cpu().detach().numpy(),1,1))
 
