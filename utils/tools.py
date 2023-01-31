@@ -205,4 +205,4 @@ def factorization_loss(f_a__, f_b__):
     kl_2 = element_wise.sum(-1)'''
 
     #print("klllll",kl_1, kl_2, kl_1_, kl_2_)
-    return (kl_1 + kl_2 + kl_1_ + kl_2_ + kl_1_new + kl_2_new)
+    return 0.01*(kl_1 + kl_2 + kl_1_ + kl_2_ + kl_1_new + kl_2_new)
