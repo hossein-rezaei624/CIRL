@@ -1,7 +1,7 @@
 config = {}
 
 batch_size = 16
-epoch = 10
+epoch = 50
 warmup_epoch = 5
 warmup_type = "sigmoid"
 lr = 0.001
