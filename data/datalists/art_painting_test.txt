@@ -1,1 +1,1 @@
-art_painting/dog/myimage_500 1
+art_painting/dog/myimage_500.jpg 1
