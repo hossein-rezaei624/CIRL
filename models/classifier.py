@@ -13,7 +13,7 @@ class Classifier(nn.Module):
 
     def forward(self, features):
         scores = self.layers(features)
-        #print("Scores:",scores)
+        print("Scores:",scores)
         return scores
 
 
