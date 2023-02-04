@@ -113,13 +113,9 @@ class Trainer:
 
             # classification loss for sup feature
             loss_cls_sup = criterion(scores_sup, labels)
-            print("loss_cls_sup",loss_cls_sup)
             loss_dict["sup"] = loss_cls_sup.item()
-            print("loss_dict[sup]",loss_dict["sup"])
             correct_dict["sup"] = calculate_correct(scores_sup, labels)
-            print("correct_dict[sup]",correct_dict["sup"])
             num_samples_dict["sup"] = int(scores_sup.size(0))
-            print("num_samples_dict[sup]",num_samples_dict["sup"])
 
             # classification loss for inf feature
             loss_cls_inf = criterion(scores_inf, labels)
