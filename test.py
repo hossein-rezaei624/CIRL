@@ -58,7 +58,7 @@ class Evaluator:
             if self.args.target in pacs_dataset:
                 labels -= 1
                 
-            print("size of the image is:",data.shape)
+            #print("size of the image is:",data.shape)
             features = self.encoder(data)
             scores = self.classifier(features)
             correct += calculate_correct(scores, labels)
