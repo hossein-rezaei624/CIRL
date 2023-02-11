@@ -104,8 +104,10 @@ class Trainer:
                 masks_inf = torch.ones_like(features.detach())
             features_sup = features * masks_sup
             features_inf = features * masks_inf
-            print("shape of sup:",features_sup.shape)
-            print("shape of inf:", features_inf.shape)
+            #print("shape of sup:",features_sup.shape)
+            #print("shape of inf:", features_inf.shape)
+            features_sup = features_sup + torch.randn((64,512)).to(self.device)
+            features_inf = features_inf + torch.randn((64,512)).to(self.device)
             scores_sup = self.classifier(features_sup)
             scores_inf = self.classifier_ad(features_inf)
 
@@ -157,6 +159,10 @@ class Trainer:
             masks_inf = torch.ones_like(masks_sup) - masks_sup
             features_sup = features * masks_sup
             features_inf = features * masks_inf
+
+            features_sup = features_sup + torch.randn((64,512)).to(self.device)
+            features_inf = features_inf + torch.randn((64,512)).to(self.device)
+            
             scores_sup = self.classifier(features_sup)
             scores_inf = self.classifier_ad(features_inf)
 
