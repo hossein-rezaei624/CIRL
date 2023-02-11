@@ -104,6 +104,8 @@ class Trainer:
                 masks_inf = torch.ones_like(features.detach())
             features_sup = features * masks_sup
             features_inf = features * masks_inf
+            print("shape of sup:",features_sup.shape)
+            print("shape of inf:", features_inf.shape)
             scores_sup = self.classifier(features_sup)
             scores_inf = self.classifier_ad(features_inf)
 
