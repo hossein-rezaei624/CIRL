@@ -10,11 +10,8 @@ class Classifier(nn.Module):
         self.num_classes = num_classes
 
         self.layers = nn.Sequential(
-            nn.Dropout(0.5),
             nn.Linear(in_dim, 128),
-            nn.BatchNorm1d(128, affine=True),
             nn.ReLU(inplace=True),
-            nn.Dropout(0.5),
             nn.Linear(128, num_classes))
 
     def forward(self, features):
