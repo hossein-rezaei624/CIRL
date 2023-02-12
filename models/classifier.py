@@ -9,11 +9,13 @@ class Classifier(nn.Module):
         self.in_dim = in_dim
         self.num_classes = num_classes
 
-        self.layers = nn.Linear(in_dim, num_classes)
+        self.layers = nn.Sequential(
+            nn.Linear(in_dim, 128),
+            nn.ReLU(inplace=True),
+            nn.Linear(128, num_classes))
 
     def forward(self, features):
         scores = self.layers(features)
-        #print("Scores:",scores)
         return scores
 
 
