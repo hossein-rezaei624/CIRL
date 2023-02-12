@@ -98,7 +98,7 @@ class Trainer:
 
             ## --------------------------step 1 : update G and C -----------------------------------
             features = self.encoder(batch)
-            #features = features + self.xxx
+            features = features + torch.normal(0, 1, size=(64,512)).to(self.device)
             masks_sup = self.masker(features.detach())
             masks_inf = torch.ones_like(masks_sup) - masks_sup
             if self.current_epoch <= 5:
@@ -156,7 +156,7 @@ class Trainer:
             ## ---------------------------------- step2: update masker------------------------------
             self.masker_optim.zero_grad()
             features = self.encoder(batch)
-            #features = features + self.xxx
+            features = features + torch.normal(0, 1, size=(64,512)).to(self.device)
             masks_sup = self.masker(features.detach())
             masks_inf = torch.ones_like(masks_sup) - masks_sup
             features_sup = features * masks_sup
