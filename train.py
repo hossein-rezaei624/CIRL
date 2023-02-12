@@ -66,6 +66,7 @@ class Trainer:
         self.test_loader = get_test_loader(args=self.args, config=self.config)
         self.eval_loader = {'val': self.val_loader, 'test': self.test_loader}
 
+        self.xxx = torch.normal(0, 0.6, size=(64,512)).to(self.device)
     def _do_epoch(self):
         criterion = nn.CrossEntropyLoss()
 
@@ -75,7 +76,6 @@ class Trainer:
         self.classifier_ad.train()
         self.masker.train()
 
-        xxx = torch.normal(0, 0.6, size=(64,512)).to(self.device)
 
         for it, (batch, label, domain) in enumerate(self.train_loader):
 
@@ -98,7 +98,7 @@ class Trainer:
 
             ## --------------------------step 1 : update G and C -----------------------------------
             features = self.encoder(batch)
-            features = features + xxx
+            features = features + self.xxx
             masks_sup = self.masker(features.detach())
             masks_inf = torch.ones_like(masks_sup) - masks_sup
             if self.current_epoch <= 5:
@@ -156,7 +156,7 @@ class Trainer:
             ## ---------------------------------- step2: update masker------------------------------
             self.masker_optim.zero_grad()
             features = self.encoder(batch)
-            features = features + xxx
+            features = features + self.xxx
             masks_sup = self.masker(features.detach())
             masks_inf = torch.ones_like(masks_sup) - masks_sup
             features_sup = features * masks_sup
