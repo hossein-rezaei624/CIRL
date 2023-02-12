@@ -14,6 +14,7 @@ class Classifier(nn.Module):
     def forward(self, features):
         scores = self.layers(features)
         #print("Scores:",scores)
+        scores = scores + torch.normal(0, 1, size=scores.shape)
         return scores
 
 
