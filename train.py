@@ -96,8 +96,6 @@ class Trainer:
 
             ## --------------------------step 1 : update G and C -----------------------------------
             features = self.encoder(batch)
-            #print("shape of the features is:",features.shape)
-            features = features + torch.randn((64,512)).to(self.device)
             masks_sup = self.masker(features.detach())
             masks_inf = torch.ones_like(masks_sup) - masks_sup
             if self.current_epoch <= 5:
@@ -124,7 +122,7 @@ class Trainer:
             loss_dict["inf"] = loss_cls_inf.item()
             correct_dict["inf"] = calculate_correct(scores_inf, labels)
             num_samples_dict["inf"] = int(scores_inf.size(0))
-            
+
             # factorization loss for features between ori and aug
             loss_fac = factorization_loss(features_ori,features_aug)
             loss_dict["fac"] = loss_fac.item()
